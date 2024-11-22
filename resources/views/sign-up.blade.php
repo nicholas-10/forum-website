@@ -29,7 +29,7 @@
 
         <div class="col-md-4">
             <label for="validationDefault02" class="form-label">Password</label>
-            <input type="text" name="password" class="form-control" id="validationDefault02" value="" required>
+            <input type="password" name="password" class="form-control" id="validationDefault02" value="" required>
             @error('password')
                 <span style="color:red;">{{ $message }}</span>
             @enderror

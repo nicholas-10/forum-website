@@ -1,4 +1,6 @@
 @extends('home')
+{{-- @extends('search') --}}
+
 <style>
     .card-hover:hover {
         background-color: rgb(255, 228, 228);

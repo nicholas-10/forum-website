@@ -11,6 +11,12 @@
                     <a class="{{'nav-link' . (request()->routeIs('home') ? ' active nav-link-bold' : '')}}" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
+                    <a class="{{'nav-link' . (request()->routeIs('articles') ? ' active nav-link-bold' : '')}}" href="/articles">Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="{{'nav-link' . (request()->routeIs('article-upload') ? ' active nav-link-bold' : '')}}" href="/article-upload">Upload Article</a>
+                </li>
+                <li class="nav-item">
                     <a class="{{'nav-link' . (request()->routeIs('post-page') ? ' active nav-link-bold' : '')}}" href="/post">Post</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -35,8 +41,8 @@
 
                 </ul>
                 <div class="mx-auto">
-                    <form class="d-flex" role="search" style="margin-right: 15px;">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex" action={{route('search')}} role="search" style="margin-right: 15px;">
+                        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
 

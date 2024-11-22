@@ -4,9 +4,29 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\OrderController;
+
 use App\Http\Controllers\CommentLikeController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ArticleController;
 
+use App\Models\Order;
+use Illuminate\Http\Request;
+Route::get('/articles', function() {
+    return view('articles');
+})->name('articles');
+Route::get('/newest', [PostController::class, 'get_recent'])->name('newest');
+Route::get('/articles', [ArticleController::class, 'show_articles'])->name('show.articles');
+
+Route::post('/article-upload', [ArticleController::class, 'add'])->name('article.upload');
+Route::get('/articles/{slug}', [ArticleController::class, 'show_article'])->name('article.show');
+
+Route::get('/article-upload', function() {
+    return view('article-upload');
+})->name('article-upload');
+Route::get('/search', function (Request $request) {
+    return OrderController::search($request);
+})->name('search');
 Route::get('/', [PostController::class, 'get_recent'])->name('home');
 Route::get('/about-us', function () {
     return view('about-us');

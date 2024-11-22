@@ -24,7 +24,7 @@
         </div>
         <div class="col-md-4">
           <label for="validationServer02" class="form-label">Password</label>
-          <input type="text" class="form-control" name="password" id="validationServer02">
+          <input type="password" class="form-control" name="password" id="validationServer02">
             @error('password')
                 <span style="color:red">{{ $message }}</span>
             @enderror
