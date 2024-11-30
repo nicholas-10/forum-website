@@ -27,6 +27,9 @@ Route::get('/article-upload', function() {
 Route::get('/search', function (Request $request) {
     return OrderController::search($request);
 })->name('search');
+Route::get('/search-article', function (Request $request) {
+    return OrderController::search_article($request);
+})->name('search-article');
 Route::get('/', [PostController::class, 'get_recent'])->name('home');
 Route::get('/about-us', function () {
     return view('about-us');

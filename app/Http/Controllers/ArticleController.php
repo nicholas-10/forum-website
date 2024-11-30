@@ -40,7 +40,7 @@ class ArticleController extends Controller
     }
     public static function show_articles(){
 
-        $articles = Article::orderBy('datetime_posted', 'desc')->paginate(10);
+        $articles = Article::orderBy('datetime_posted', 'desc')->paginate(5);
         foreach ($articles as $article){
             $article->name = DB::table('users')->where('id', '=', $article->user_id)->get()[0]->name;
         }

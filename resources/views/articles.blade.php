@@ -27,7 +27,7 @@
                             <img src="{{url($article->image_path)}}" class="card-img-top mx-auto" style="width: 25%; height:25%" alt="...">
                         </div>
                   <h6 class="card-subtitle mb-2 text-muted">By: {{ $article->name }} | Date: {{ $article->datetime_posted }}</h6>
-                  <p class="card-text">{{$article->content}}</p>
+                  <p class="card-text">{{substr($article->content, 0, 500)}}</p>
                 </div>
 
             </div>

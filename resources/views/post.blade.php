@@ -44,8 +44,7 @@
           </form>
 
       @endauth
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+          <a href="#" class="card-link">Post Link</a>
         </div>
     </div>
       {{-- {{$comments}} --}}
@@ -85,10 +84,9 @@
                 @endauth
             </h6>
             <p class="card-text">{{$comment->content}}</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
             </div>
         </div>
+        <br>
     @endforeach
 
     @include('layouts.footer')

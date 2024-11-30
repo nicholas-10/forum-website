@@ -18,17 +18,30 @@
 
     @include('layouts.navbar')
     {{-- <h1>Welcome to the Home Page</h1> --}}
-    <button type="button" class="btn btn-secondary">Posts</button> <button type="button" class="btn btn-secondary">Users</button> <button type="button" class="btn btn-secondary">Articles</button>
+    <div class="mx-auto">
+        <form class="d-flex " action={{route('search')}} role="search" style="margin-right: 15px;">
+            <button type="submit"  class="btn btn-secondary">Posts</button>
+        </form>
+        <form class="d-flex" action={{route('search-article')}} role="search" style="margin-right: 15px;">
+            <button type="submit" class="btn btn-secondary">Articles</button>
+
+        </form>
+    </div>
+
+
         <div class="row justify-content-center">
             @foreach ($posts as $post)
-            {{($posts)}}
                 <div class="card card-hover" style="width: 25rem;">
                     <a style="color: inherit; text-decoration: none;" href="{{ route('posts.show', $post->slug) }}" class="">
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary">
                                 {{-- {{$post}} --}}
-                                By: {{ $post->name }} | Date: {{ $post->datetime_posted }} | Likes: {{$post->likes}}
+                                By: {{ $post->name }} | Date: {{ $post->datetime_posted }}
+                                @if(Route::currentRouteName() == 'search')
+                                    | Likes: {{$post->likes}}
+                                @endif
+
 
                             </h6>
                             <p class="card-text">
