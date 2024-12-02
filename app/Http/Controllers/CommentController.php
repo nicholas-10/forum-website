@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function comment(Request $request){
+    public function comment(Request $request)
+    {
         $validation = $request->validate([
             'content' => 'required|max:800',
         ]);
@@ -25,8 +26,8 @@ class CommentController extends Controller
         // echo $lastSegment;
         // $temp = $headers->referer;
         // dd($request);
-        $referer =  $request->headers->get('referer');
-        $temp = explode('/',$referer);
+        $referer = $request->headers->get('referer');
+        $temp = explode('/', $referer);
         $slug = end($temp);
         // dd($temp);
         $a = DB::table('posts')
@@ -38,9 +39,10 @@ class CommentController extends Controller
         return redirect()->back()->with('success', 'Comment submitted successfully!');
         // return view('home');
     }
-    public static function get_comments($post_id){
+    public static function get_comments($post_id)
+    {
         $comments = Comment::withCount('comment_likes')->join('users', 'users.id', 'comments.user_id')
-            ->where('comments.post_id', '=', $post_id)->get();
+            ->where('comments.post_id', '=', $post_id)->orderBy('updated_at', 'desc')->get();
         foreach ($comments as $comment) {
             $comment->name = DB::table('users')->where('users.id', '=', $comment->user_id)->get()[0]->name;
         }

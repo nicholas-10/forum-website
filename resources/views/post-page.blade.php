@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Upload a Post</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     @include('layouts.navbar')
+    <div class="container flex-grow-1">
     @auth
-        <form action={{ route('post') }} method="POST">
+        <form class="border rounded p-4 d-flex flex-column gap-3" action={{ route('post') }} method="POST">
             @csrf
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Title</label>
-                <input type="text" class="form-control" id="postTitle" name="title" placeholder="Title">
+            <h2>Upload a Post</h2>
+            <div class="d-flex flex-column fw-bold">
+                <label for="exampleFormControlInput1" class="form-label">Post Title</label>
+                <input type="text" class="form-control" id="postTitle" name="title" placeholder="e.g. What is Gender Equality?">
             </div>
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Content</label>
-                <textarea class="form-control" id="postContent" name="content" rows="3"></textarea>
+            <div class="d-flex flex-column fw-bold">
+                <label for="exampleFormControlTextarea1" class="form-label">Post Content</label>
+                <textarea class="form-control" id="postContent" name="content" rows="3" placeholder="e.g. What is it exactly?"></textarea>
             </div>
-            <div class="col-auto">
-                <button  type="submit" class="btn btn-primary mb-3">Post</button>
-            </div>
+            <button type="submit" class="btn btn-primary">Post</button>
         </form>
     @endauth
     @guest
@@ -31,6 +31,7 @@
             window.location.href = "{{ route('login') }}";
         </script>
     @endguest
+    </div>
 
 
     @include('layouts.footer')

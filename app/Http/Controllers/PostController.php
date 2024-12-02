@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function post(Request $request){
+    public function post(Request $request)
+    {
         $validation = $request->validate([
             'title' => 'required|max:128',
             'content' => 'required|max:800',
@@ -33,32 +34,34 @@ class PostController extends Controller
         // dd($post);
         return redirect()->route('posts.show', $post->slug);
     }
-    public function get_recent(){
-        // $posts = DB::table('posts')->join('users', 'posts.user_id', '=', 'users.id')->select('posts.*', 'users.name as name')->orderBy('datetime_posted', 'desc')->paginate(12);
+    public function get_recent()
+    {
+        // $posts = DB::table('posts')->join('users', 'posts.user_id', '=', 'users.id')->select('posts.*', 'users.name as name')->orderBy('updated_at', 'desc')->paginate(12);
         // foreach ($posts as $post) {
         //     $post->likes = PostController::count_likes($post->id);
         // }
-        $posts = Post::withCount('likes')->orderBy('datetime_posted', 'desc')->paginate(12);
+        $posts = Post::withCount('likes')->orderBy('updated_at', 'desc')->paginate(12);
         foreach ($posts as $post) {
             $post->likes = $post->likes_count;
         }
-        foreach ($posts as $post){
+        foreach ($posts as $post) {
             $post->name = DB::table('users')->where('id', '=', $post->user_id)->get()[0]->name;
         }
-        return view('display', ['posts'=>$posts]);
+        return view('display', ['posts' => $posts]);
     }
-    public function get_top(){
+    public function get_top()
+    {
         $posts = Post::withCount('likes')->orderBy('likes_count', 'desc')->paginate(12);
         foreach ($posts as $post) {
             $post->likes = $post->likes_count;
         }
-        foreach ($posts as $post){
+        foreach ($posts as $post) {
             $post->name = DB::table('users')->where('id', '=', $post->user_id)->get()[0]->name;
         }
         // $posts->likes = count($posts->likes);
         // echo $posts;
 
-        return view('display', ['posts'=>$posts]);
+        return view('display', ['posts' => $posts]);
 
     }
     // public function count_likes($id){
@@ -68,7 +71,7 @@ class PostController extends Controller
     // }
     public function show_post($slug)
     {
-        $post = Post::withCount('likes')->where('posts.slug', '=',$slug)->firstOrFail();
+        $post = Post::withCount('likes')->where('posts.slug', '=', $slug)->firstOrFail();
         $post->likes = $post->likes_count;
         $post->name = DB::table('users')->where('id', '=', $post->user_id)->get()[0]->name;
         // $post = DB::table('posts')
@@ -85,7 +88,7 @@ class PostController extends Controller
         if (Auth::check()) {
             $post->is_liked_by_user = LikeController::is_liked_by_user(Auth::user()->id, $post->id);
             foreach ($comments as $comment) {
-                    $comment->is_liked_by_user = CommentLikeController::is_liked_by_user(Auth::user()->id, $comment->id);
+                $comment->is_liked_by_user = CommentLikeController::is_liked_by_user(Auth::user()->id, $comment->id);
 
             }
         }

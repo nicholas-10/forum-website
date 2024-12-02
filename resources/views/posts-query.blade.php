@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Post Query</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
+    <div class="container flex-grow-1">
     <div class="card" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
@@ -16,6 +17,6 @@
           <a href="#" class="card-link">Another link</a>
         </div>
       </div>
-
+    </div>
 </body>
 </html>

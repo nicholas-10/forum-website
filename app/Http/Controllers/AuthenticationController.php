@@ -29,9 +29,13 @@ class AuthenticationController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
-    public function loginPage(){
-        return view('login');
-
+    public function loginPage()
+    {
+        if (auth()->user()) {
+            return redirect(route('home'));
+        } else {
+            return view('login');
+        }
     }
     public function logout(Request $request): RedirectResponse
     {
@@ -43,15 +47,21 @@ class AuthenticationController extends Controller
 
         return redirect('/');
     }
-    public function signupPage(){
-        return view('sign-up');
+    public function signupPage()
+    {
+        if (auth()->user()) {
+            return redirect(route('home'));
+        } else {
+            return view('sign-up');
+        }
     }
-    public function signup(Request $request): RedirectResponse{
+    public function signup(Request $request): RedirectResponse
+    {
         $validation = $request->validate([
-            'email' => ['unique:users','email:rfc,dns', 'required'],
+            'email' => ['unique:users', 'email:rfc,dns', 'required'],
             'password' => ['required', Password::min(8)],
             'age' => 'required|lt:100',
-            'name' => ['unique:users','required'],
+            'name' => ['unique:users', 'required'],
             'gender' => 'required'
         ]);
         // dd($request->all());
@@ -59,8 +69,8 @@ class AuthenticationController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->age = $request->age ;
-        $user->gender = $request->gender ;
+        $user->age = $request->age;
+        $user->gender = $request->gender;
         $user->password = Hash::make($request->password);
         $user->save();
         Auth::login($user);
@@ -69,13 +79,9 @@ class AuthenticationController extends Controller
     }
     public function checkLogin()
     {
-
-        if (auth()->user())
-        {
-            pass;
-        }
-        else
-        {
+        if (auth()->user()) {
+            return redirect(route('/'));
+        } else {
             return redirect(route('/login'));
         }
     }

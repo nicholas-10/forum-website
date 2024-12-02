@@ -17,7 +17,8 @@ use App\Models\Article;
 class ArticleController extends Controller
 {
     //
-    public function add(Request $request){
+    public function add(Request $request)
+    {
 
         $validated = $request->validate([
             'title' => 'required|unique:posts|max:255',
@@ -38,10 +39,11 @@ class ArticleController extends Controller
 
         return redirect()->route('article.show', $article->slug);
     }
-    public static function show_articles(){
+    public static function show_articles()
+    {
 
-        $articles = Article::orderBy('datetime_posted', 'desc')->paginate(5);
-        foreach ($articles as $article){
+        $articles = Article::orderBy('updated_at', 'desc')->paginate(5);
+        foreach ($articles as $article) {
             $article->name = DB::table('users')->where('id', '=', $article->user_id)->get()[0]->name;
         }
         return view('articles', ['articles' => $articles]);
