@@ -1,2 +1,0 @@
-1. dropdown doesnt appear when in a dropdown page (eg /newest)
-2. fix the authentication sign up

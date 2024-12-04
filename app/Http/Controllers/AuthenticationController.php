@@ -29,6 +29,7 @@ class AuthenticationController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
+
     public function loginPage()
     {
         if (auth()->user()) {
@@ -37,6 +38,7 @@ class AuthenticationController extends Controller
             return view('login');
         }
     }
+
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
@@ -47,6 +49,7 @@ class AuthenticationController extends Controller
 
         return redirect('/');
     }
+
     public function signupPage()
     {
         if (auth()->user()) {
@@ -55,6 +58,7 @@ class AuthenticationController extends Controller
             return view('sign-up');
         }
     }
+
     public function signup(Request $request): RedirectResponse
     {
         $validation = $request->validate([
@@ -76,13 +80,5 @@ class AuthenticationController extends Controller
         Auth::login($user);
         return redirect()->route('home')->withSuccess('Registered Successfully');
 
-    }
-    public function checkLogin()
-    {
-        if (auth()->user()) {
-            return redirect(route('/'));
-        } else {
-            return redirect(route('/login'));
-        }
     }
 }

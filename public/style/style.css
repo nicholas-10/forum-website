@@ -1,0 +1,18 @@
+:root {
+    --beige: #faf6e3;
+    --sage: #d8dbbd;
+    --brown: #b59f78;
+    --navy: #2a3663;
+}
+
+footer {
+    background-color: var(--navy);
+}
+
+.hover-underline:hover {
+    text-decoration: underline;
+}
+
+.card-hover:hover {
+    background-color: var(--beige);
+}

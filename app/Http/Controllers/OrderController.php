@@ -12,21 +12,27 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     //
-    public static function search(Request $request){
+    public static function search(Request $request)
+    {
         $posts = Post::withCount('likes')->where('title', 'like', "%{$request->search}%")->paginate(12);
         foreach ($posts as $post) {
             $post->likes = $post->likes_count;
         }
-        foreach ($posts as $post){
-            $post->name = DB::table('users')->where('id', '=', $post->user_id)->get()[0]->name;
+        foreach ($posts as $post) {
+            $user = DB::table('users')->where('id', '=', $post->user_id)->get()[0];
+            $post->gender = $user->gender;
+            $post->age = $user->age;
         }
-        return view('search', ['posts'=>$posts]);
+        return view('search', ['posts' => $posts]);
     }
-    public static function search_article(Request $request){
+    public static function search_article(Request $request)
+    {
         $posts = Article::where('title', 'like', "%{$request->search}%")->paginate(12);
-        foreach ($posts as $post){
-            $post->name = DB::table('users')->where('id', '=', $post->user_id)->get()[0]->name;
+        foreach ($posts as $post) {
+            $user = DB::table('users')->where('id', '=', $post->user_id)->get()[0];
+            $post->gender = $user->gender;
+            $post->age = $user->age;
         }
-        return view('search', ['posts'=>$posts]);
+        return view('search', ['posts' => $posts]);
     }
 }

@@ -37,12 +37,11 @@ class CommentController extends Controller
 
         // $comment->post_id = $request->
         return redirect()->back()->with('success', 'Comment submitted successfully!');
-        // return view('home');
     }
     public static function get_comments($post_id)
     {
         $comments = Comment::withCount('comment_likes')->join('users', 'users.id', 'comments.user_id')
-            ->where('comments.post_id', '=', $post_id)->orderBy('updated_at', 'desc')->get();
+            ->where('comments.post_id', '=', $post_id)->orderBy('updated_at', 'asc')->get();
         foreach ($comments as $comment) {
             $comment->name = DB::table('users')->where('users.id', '=', $comment->user_id)->get()[0]->name;
         }

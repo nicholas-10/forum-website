@@ -1,42 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Upload an Article</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+@extends('layouts.layout')
 
-</head>
-<body class="d-flex flex-column min-vh-100">
+@section('title', 'Upload Article')
 
-    @include('layouts.navbar')
-    <div class="container flex-grow-1">
-    <form class="border rounded p-4 d-flex flex-column gap-3" action="{{ route('article.upload') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <h2>Upload an Article</h2>
-        <div class="d-flex flex-column fw-bold">
-            <label for="image" class="form-label">Article Title</label>
-            <input type="text" name="title" class="form-control" id="floatingInput" placeholder="e.g. The Importance of Gender Equality">
-        </div>
-        <div class="d-flex flex-column fw-bold">
-            <label for="image" class="form-label">Article Content</label>
-            <textarea class="form-control" name="content" placeholder="e.g. Gender equality is..." id="floatingTextarea"></textarea>
-        </div>
-        <div class="d-flex flex-column fw-bold">
-            <label for="image" class="form-label">Article Image</label>
-            <input type="file" name="image" id="image" accept="image/*" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Upload</button>
-        </form>
-    @guest
-    <script>
-        window.location.href = "{{ route('login') }}";
-    </script>
-    @endguest
+@section('content')
+<form class="border rounded p-4 d-flex flex-column gap-3 bg-white" style="margin-top: 5vh" action="{{ route('article.upload') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <h2>Upload an Article</h2>
+    <div class="d-flex flex-column fw-bold">
+        <label for="title" class="form-label">Article Title</label>
+        <input type="text" name="title" class="form-control" id="title" placeholder="e.g. The Importance of Gender Equality">
     </div>
-
-    @include('layouts.footer')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
+    <div class="d-flex flex-column fw-bold">
+        <label for="content" class="form-label">Article Content</label>
+        <textarea class="form-control" name="content" placeholder="e.g. Gender equality is..." id="content"></textarea>
+    </div>
+    <div class="d-flex flex-column fw-bold">
+        <label for="image" class="form-label">Article Image</label>
+        <input type="file" name="image" id="image" accept="image/*" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+@endsection
