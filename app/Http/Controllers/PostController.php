@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentLikeController;
 use App\Http\Controllers\LikeController;
+use Illuminate\Pagination\Paginator;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,22 @@ class PostController extends Controller
         $post->save();
         return redirect()->route('posts.show', $post->slug);
     }
-
+    public function get_popular()
+    {
+        $posts = Post::withCount('likes')->paginate(12);
+        foreach ($posts as $post) {
+            $post->likes = $post->likes_count;
+        }
+        foreach ($posts as $post) {
+            $user = DB::table('users')->where('id', '=', $post->user_id)->get()[0];
+            $post->gender = $user->gender;
+            $post->age = $user->age;
+        }
+        foreach ($posts as $post) {
+            $post->score = $post->likes  + (time() - strtotime($post->updated_at)) / 100000;
+        }
+        return view('display', ['posts' => $posts]);
+    }
     public function get_recent()
     {
         $posts = Post::withCount('likes')->orderBy('updated_at', 'desc')->paginate(12);
@@ -47,6 +63,7 @@ class PostController extends Controller
             $post->gender = $user->gender;
             $post->age = $user->age;
         }
+
         return view('display', ['posts' => $posts]);
     }
 

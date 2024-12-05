@@ -26,7 +26,8 @@ class CommentController extends Controller
         $comment->content = $request->content;
         $comment->user_id = Auth::user()->id;
         $referer = $request->headers->get('referer');
-        $temp = explode('/', $referer);
+        $temp = explode('-', $referer);
+        // dd($temp);
         $id = end($temp);
         $comment->post_id = $id;
         $comment->save();
