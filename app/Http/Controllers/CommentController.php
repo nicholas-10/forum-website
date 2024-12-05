@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
+    public function delete_comment(Request $request){
+        $deleted = DB::table('comments')->where('comments.id', '=', $request->comment_id)->delete();
+        return redirect()->back();
+    }
     public function comment(Request $request)
     {
         $validation = $request->validate([
@@ -34,7 +38,6 @@ class CommentController extends Controller
         foreach ($comments as $comment) {
             $comment->name = DB::table('users')->where('users.id', '=', $comment->user_id)->get()[0]->name;
         }
-
         return $comments;
     }
 
