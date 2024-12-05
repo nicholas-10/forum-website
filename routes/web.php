@@ -13,7 +13,7 @@ use App\Http\Controllers\ArticleController;
 use Illuminate\Http\Request;
 
 Route::get('/articles', [ArticleController::class, 'show_articles'])->name('articles');
-Route::get('/articles/{slug}', [ArticleController::class, 'show_article'])->name('article.show');
+Route::get('/articles/{id}', [ArticleController::class, 'show_article'])->name('article.show');
 
 Route::get('/article-upload', function (Request $request) {
     if (!(auth()->user())) {
@@ -58,7 +58,11 @@ Route::get('/about-us', function () {
 })->name('about');
 
 Route::get('/post', function () {
-    return view('post-page');
+    if (!(auth()->user())) {
+        return redirect(route('login.page'));
+    } else {
+        return view('post-page');
+    }
 })->name('post.page');
 Route::post('post', [PostController::class, 'post'])->name('post');
 

@@ -15,7 +15,7 @@
     @foreach ($posts as $post)
     <div class="col-md-4 mb-4">
         <div class="card card-hover" >
-            <a style="color: inherit; text-decoration: none;" href="{{ route('posts.show', $post->slug) }}" class="">
+            <a style="color: inherit; text-decoration: none;" href="{{ route('posts.show', $post->id) }}" class="">
                 <div class="card-body">
                     <h5 class="card-title">{{ $post->title }}</h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">

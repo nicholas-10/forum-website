@@ -22,7 +22,6 @@ class PostController extends Controller
             'title' => 'required|max:128',
             'content' => 'required|max:800',
         ]);
-        // dd($request->all());
         $post = new Post();
         $post->title = $request->title;
         $post->edited = 0;
@@ -30,16 +29,11 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->user_id = Auth::user()->id;
         $post->save();
-        // dd($post);
         return redirect()->route('posts.show', $post->id);
     }
 
     public function get_recent()
     {
-        // $posts = DB::table('posts')->join('users', 'posts.user_id', '=', 'users.id')->select('posts.*', 'users.name as name')->orderBy('updated_at', 'desc')->paginate(12);
-        // foreach ($posts as $post) {
-        //     $post->likes = PostController::count_likes($post->id);
-        // }
         $posts = Post::withCount('likes')->orderBy('updated_at', 'desc')->paginate(12);
         foreach ($posts as $post) {
             $post->likes = $post->likes_count;
@@ -63,11 +57,8 @@ class PostController extends Controller
             $post->gender = $user->gender;
             $post->age = $user->age;
         }
-        // $posts->likes = count($posts->likes);
-        // echo $posts;
 
         return view('display', ['posts' => $posts]);
-
     }
 
     public function show_post($id)

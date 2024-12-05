@@ -19,23 +19,12 @@ class CommentController extends Controller
         $comment->datetime_commented = date('Y-m-d'); //  H:i:s');
         $comment->content = $request->content;
         $comment->user_id = Auth::user()->id;
-        // $temp = explode('/',$currentUrl);
-        // $lastSegment = end($temp);
-        // $a = url()->full();
-        // dd($a);
-        // echo $lastSegment;
-        // $temp = $headers->referer;
-        // dd($request);
         $referer = $request->headers->get('referer');
         $temp = explode('/', $referer);
-        $slug = end($temp);
-        // dd($temp);
-        $a = DB::table('posts')
-            ->where('posts.slug', '=', $slug)->firstOrFail();
-        $comment->post_id = $a->id;
+        $id = end($temp);
+        $comment->post_id = $id;
         $comment->save();
 
-        // $comment->post_id = $request->
         return redirect()->back()->with('success', 'Comment submitted successfully!');
     }
     public static function get_comments($post_id)

@@ -13,17 +13,13 @@ class LikeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
         $userIds = DB::table('users')->pluck('id');
         $userIds = $userIds->toArray();
         $postIds = DB::table('posts')->pluck('id');
         $postIds = $postIds->toArray();
-        for ($i=0; $i < 1000; $i++) {
-            DB::table('likes')->insert([
-                'user_id' => $userIds[array_rand($userIds)],
-                'post_id' => $postIds[array_rand($postIds)]
-            ]);
-        }
-
+        DB::table('likes')->insert([
+            'user_id' => $userIds[array_rand($userIds)],
+            'post_id' => $postIds[array_rand($postIds)]
+        ]);
     }
 }

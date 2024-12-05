@@ -32,7 +32,7 @@
 
     <div>
       <label for="validationDefault03" class="form-label fw-bold">Age</label>
-      <input type="number" name="age" class="form-control" id="validationDefault03" required>
+      <input type="number" name="age" class="form-control" id="validationDefault03" value="{{ old('age') }}" required>
       @error('age')
           <span style="color:red;">{{ $message }}</span>
       @enderror
@@ -42,13 +42,13 @@
         <label for="gender" class="form-label fw-bold">Gender</label>
         <div class="d-flex gap-4">
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="Male">
+                <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" {{ (old('gender') == 'Male') ? 'checked' : '' }} value="Male">
                 <label class="form-check-label" for="flexRadioDefault1">
                     Male
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="Female">
+                <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" {{ (old('gender') == 'Female') ? 'checked' : '' }} value="Female">
                 <label class="form-check-label" for="flexRadioDefault2">
                     Female
                 </label>

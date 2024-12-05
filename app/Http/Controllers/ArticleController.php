@@ -31,13 +31,12 @@ class ArticleController extends Controller
         $article = new Article();
         $article->title = $request->title;
         $article->content = $request->content;
-        $article->datetime_posted = date('Y-m-d'); //  H:i:s');
-        $article->slug = Str::of($request->title)->slug('-');
+        $article->datetime_posted = date('Y-m-d');
         $article->user_id = Auth::user()->id;
         $article->image_path = $path;
         $article->save();
 
-        return redirect()->route('article.show', $article->slug);
+        return redirect()->route('article.show', $article->id);
     }
     public static function show_articles()
     {
@@ -47,9 +46,9 @@ class ArticleController extends Controller
         }
         return view('articles', ['articles' => $articles]);
     }
-    public function show_article($slug)
+    public function show_article($id)
     {
-        $article = Article::where('articles.slug', '=', $slug)->firstOrFail();
+        $article = Article::where('articles.id', '=', $id)->firstOrFail();
         $article->name = DB::table('users')->where('id', '=', $article->user_id)->get()[0]->name;
         return view('article', ['article' => $article]);
     }
