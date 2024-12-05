@@ -92,7 +92,7 @@
         @auth
         <form action="{{route('delete.comment')}}" method="POST">
             @csrf
-            @if ($post->user_id == Auth::user()->id || Auth::user()->is_admin)
+            @if ($comment->user_id == Auth::user()->id || Auth::user()->is_admin)
                 <button type="submit"  id="like-button" value="like" name="likestatus" class="btn like-btn ">Delete</button>
             @endif
             <input type="hidden" name="comment_id" value={{$comment->id}}>
