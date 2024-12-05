@@ -38,7 +38,7 @@ Route::get('/search-article', function (Request $request) {
 
 Route::get('/newest', [PostController::class, 'get_recent'])->name('newest');
 Route::get('/most-liked', [PostController::class, 'get_top'])->name('most.liked');
-
+Route::get('/popular', [PostController::class, 'get_popular'])->name('popular.posts');
 Route::get('/login', [AuthenticationController::class, 'loginPage'])->name('login.page');
 Route::post('login', [AuthenticationController::class, 'authenticate'])->name('login');
 

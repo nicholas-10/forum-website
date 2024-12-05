@@ -23,8 +23,10 @@
                         @endif
                     </a>
                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('popular.posts') }}">Popular</a></li>
                         <li><a class="dropdown-item" href="{{ route('most.liked') }}">Most Liked</a></li>
                         <li><a class="dropdown-item" href="{{ route('newest') }}">Newest</a></li>
+
                     </ul>
                 </li>
                 <li class="nav-item">
