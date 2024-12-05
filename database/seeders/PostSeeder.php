@@ -16,7 +16,7 @@ class PostSeeder extends Seeder
     {
         $userIds = DB::table('users')->pluck('id');
         $userIds = $userIds->toArray();
-        for ($i=0; $i < 100; $i++) {
+        for ($i=0; $i < 20; $i++) {
             $temp = Str::random(15);
             DB::table('posts')->insert([
                 'title' => $temp,

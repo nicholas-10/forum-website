@@ -18,7 +18,7 @@ class LikeSeeder extends Seeder
         $userIds = $userIds->toArray();
         $postIds = DB::table('posts')->pluck('id');
         $postIds = $postIds->toArray();
-        for ($i=0; $i < 1000; $i++) {
+        for ($i=0; $i < 300; $i++) {
             DB::table('likes')->insert([
                 'user_id' => $userIds[array_rand($userIds)],
                 'post_id' => $postIds[array_rand($postIds)]

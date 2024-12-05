@@ -73,7 +73,10 @@ class PostController extends Controller
         return view('display', ['posts' => $posts]);
 
     }
-
+    public function delete_post(Request $request){
+        $deleted = DB::table('posts')->where('posts.id', '=', $request->post_id)->delete();
+        return redirect()->route('home');
+    }
     public function show_post($slug)
     {
         $post = Post::withCount('likes')->where('posts.slug', '=', $slug)->firstOrFail();

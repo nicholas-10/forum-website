@@ -7,21 +7,23 @@
 .like-btn.active {
     color: black;
     border: none;
-    background-color: lime;
+    background-color: rgb(255, 164, 250);
+    /* lime */
 }
 
 .like-btn {
     color: black;
-    border-color: lime;
+    border-color: rgb(255, 164, 250);
+    /* lime */
     background-color: transparent;
 }
 
 .like-btn.active:hover {
-    background-color: rgb(0, 225, 0);
+    background-color: rgb(255, 164, 250);
 }
 
 .like-btn:hover {
-    background-color: lime;
+    background-color: rgb(255, 164, 250);
 }
 </style>
 <div class="card mb-4">
@@ -29,7 +31,8 @@
       <h5 class="card-title">{{$post->title}}</h5>
       <h6 class="card-subtitle mb-2 text-muted">By: {{ $post->gender }} ({{ $post->age }}) | Date: {{ $post->datetime_posted }} | Likes: {{$post->likes}}</h6>
       <p class="card-text">{{$post->content}}</p>
-      @auth
+      <div class="mx-auto">
+        @auth
         <form action="{{route('like.post')}}" method="POST">
             @csrf
             @if (!$post->is_liked_by_user)
@@ -37,10 +40,20 @@
             @else
                 <button type="submit"  id="like-button" value="no-like" name="likestatus" class="btn like-btn active">Unlike</button>
             @endif
-
             <input type="hidden" name="post_id" value={{$post->id}}>
         </form>
         @endauth
+        @auth
+        <form action="{{route('delete.post')}}" method="POST">
+            @csrf
+            @if ($post->user_id == Auth::user()->id || Auth::user()->is_admin)
+                <button type="submit"  id="like-button" value="like" name="likestatus" class="btn like-btn ">Delete</button>
+            @endif
+            <input type="hidden" name="post_id" value={{$post->id}}>
+        </form>
+        @endauth
+      </div>
+
     </div>
 </div>
 @auth
@@ -75,6 +88,15 @@
                 @endif
                 <input type="hidden" name="comment_id" value={{$comment->id}}>
             </form>
+        @endauth
+        @auth
+        <form action="{{route('delete.comment')}}" method="POST">
+            @csrf
+            @if ($post->user_id == Auth::user()->id || Auth::user()->is_admin)
+                <button type="submit"  id="like-button" value="like" name="likestatus" class="btn like-btn ">Delete</button>
+            @endif
+            <input type="hidden" name="comment_id" value={{$comment->id}}>
+        </form>
         @endauth
         </div>
     </div>

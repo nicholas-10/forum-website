@@ -16,11 +16,20 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
+            'name' => "admine",
+            'email' => 'admin@gmail.com',
+            'password' =>  Hash::make('password'),
+            'age' => rand(18, 30),
+            'gender' => 'Male',
+            'is_admin' => true,
+        ]);
+        DB::table('users')->insert([
             'name' => "sam",
             'email' => 'sam@gmail.com',
             'password' =>  Hash::make('password'),
             'age' => rand(18, 30),
             'gender' => 'Male',
+            'is_admin' => true,
         ]);
         for ($i=0; $i < 10; $i++) {
             DB::table('users')->insert([
@@ -29,6 +38,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'age' => rand(18, 30),
                 'gender' => 'Male',
+                'is_admin' => false,
             ]);
 
         }
