@@ -31,14 +31,12 @@ class ArticleController extends Controller
         $article = new Article();
         $article->title = $request->title;
         $article->content = $request->content;
-        $article->datetime_posted = date('Y-m-d'); //  H:i:s');
-        $article->slug = Str::of($request->title)->slug('-');
+        $article->datetime_posted = date('Y-m-d');
         $article->user_id = Auth::user()->id;
         $article->image_path = $path;
         $article->save();
         $article->slug = Str::of($request->title)->slug('-') . '-' . $article->id ;
         $article->delete();
-
         $article->save();
 
         return redirect()->route('article.show', $article->slug);

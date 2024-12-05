@@ -9,10 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function delete_comment(Request $request){
+    public function delete_comment(Request $request)
+    {
         $deleted = DB::table('comments')->where('comments.id', '=', $request->comment_id)->delete();
         return redirect()->back();
     }
+
     public function comment(Request $request)
     {
         $validation = $request->validate([
@@ -23,23 +25,12 @@ class CommentController extends Controller
         $comment->datetime_commented = date('Y-m-d'); //  H:i:s');
         $comment->content = $request->content;
         $comment->user_id = Auth::user()->id;
-        // $temp = explode('/',$currentUrl);
-        // $lastSegment = end($temp);
-        // $a = url()->full();
-        // dd($a);
-        // echo $lastSegment;
-        // $temp = $headers->referer;
-        // dd($request);
         $referer = $request->headers->get('referer');
         $temp = explode('/', $referer);
-        $slug = end($temp);
-        // dd($temp);
-        $a = DB::table('posts')
-            ->where('posts.slug', '=', $slug)->firstOrFail();
-        $comment->post_id = $a->id;
+        $id = end($temp);
+        $comment->post_id = $id;
         $comment->save();
 
-        // $comment->post_id = $request->
         return redirect()->back()->with('success', 'Comment submitted successfully!');
     }
     public static function get_comments($post_id)

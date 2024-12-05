@@ -34,7 +34,7 @@
 
             <div class="d-flex gap-4">
                 <form class="my-auto d-flex align-items-center justify-content-center" action="{{ route('search') }}" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search here..." name="search" aria-label="Search">
+                    <input class="form-control me-2" type="search" placeholder="Search here..." @isset($search) value="{{$search}}" @endisset name="search" aria-label="Search">
                 </form>
 
                 <div class="flex-column">

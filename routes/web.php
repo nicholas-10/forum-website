@@ -60,11 +60,15 @@ Route::get('/about-us', function () {
 })->name('about');
 
 Route::get('/post', function () {
-    return view('post-page');
+    if (!(auth()->user())) {
+        return redirect(route('login.page'));
+    } else {
+        return view('post-page');
+    }
 })->name('post.page');
 Route::post('post', [PostController::class, 'post'])->name('post');
 
-Route::get('/posts/{slug}', [PostController::class, 'show_post'])->name('posts.show');
+Route::get('/posts/{id}', [PostController::class, 'show_post'])->name('posts.show');
 
 Route::post('comments', [CommentController::class, 'comment'])->name('comment');
 Route::post('comments/like', [CommentLikeController::class, 'commentLike'])->name('like.comment');

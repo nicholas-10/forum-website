@@ -18,12 +18,9 @@ class CommentLikeSeeder extends Seeder
         $userIds = $userIds->toArray();
         $commentIds = DB::table('comments')->pluck('id');
         $commentIds = $commentIds->toArray();
-        for ($i=0; $i < 1000; $i++) {
-            DB::table('comment_likes')->insert([
-                'user_id' => $userIds[array_rand($userIds)],
-                'comment_id' => $commentIds[array_rand($commentIds)]
-            ]);
-        }
-
+        DB::table('comment_likes')->insert([
+            'user_id' => $userIds[array_rand($userIds)],
+            'comment_id' => $commentIds[array_rand($commentIds)]
+        ]);
     }
 }
