@@ -22,13 +22,13 @@ class CommentController extends Controller
         ]);
         $comment = new Comment();
         $comment->edited = 0;
-        $comment->datetime_commented = date('Y-m-d'); //  H:i:s');
+        $comment->datetime_commented = date('Y-m-d');
         $comment->content = $request->content;
         $comment->user_id = Auth::user()->id;
         $referer = $request->headers->get('referer');
         $temp = explode('/', $referer);
-        $id = end($temp);
-        $comment->post_id = $id;
+        $slug = end($temp);
+        $comment->post_id = DB::table('posts')->where('posts.slug', '=', $slug)->get()[0]->id;
         $comment->save();
 
         return redirect()->back()->with('success', 'Comment submitted successfully!');
