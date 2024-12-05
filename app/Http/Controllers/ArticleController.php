@@ -36,6 +36,10 @@ class ArticleController extends Controller
         $article->user_id = Auth::user()->id;
         $article->image_path = $path;
         $article->save();
+        $article->slug = Str::of($request->title)->slug('-') . '-' . $article->id ;
+        $article->delete();
+
+        $article->save();
 
         return redirect()->route('article.show', $article->slug);
     }

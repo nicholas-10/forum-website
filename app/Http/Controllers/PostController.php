@@ -29,9 +29,13 @@ class PostController extends Controller
         $post->datetime_posted = date('Y-m-d'); //  H:i:s');
         $post->content = $request->content;
         $post->user_id = Auth::user()->id;
+        $post->slug = Str::of($request->title)->slug('-');
+        $post->save();
+        $post->slug = Str::of($request->title)->slug('-') . '-' . $post->id ;
+        $post->delete();
         $post->save();
         // dd($post);
-        return redirect()->route('posts.show', $post->id);
+        return redirect()->route('posts.show', $post->slug);
     }
 
     public function get_recent()
@@ -70,9 +74,9 @@ class PostController extends Controller
 
     }
 
-    public function show_post($id)
+    public function show_post($slug)
     {
-        $post = Post::withCount('likes')->where('posts.id', '=', $id)->firstOrFail();
+        $post = Post::withCount('likes')->where('posts.slug', '=', $slug)->firstOrFail();
         $post->likes = $post->likes_count;
         $user = DB::table('users')->where('id', '=', $post->user_id)->get()[0];
         $post->gender = $user->gender;
