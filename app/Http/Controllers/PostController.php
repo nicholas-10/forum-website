@@ -38,7 +38,13 @@ class PostController extends Controller
     }
     public function get_popular()
     {
-        $posts = Post::withCount('likes')->paginate(12);
+        $posts = DB::table('posts')
+            ->selectRaw('posts.*, COUNT(likes.id) as likes_count, (UNIX_TIMESTAMP() - UNIX_TIMESTAMP(posts.updated_at)) / 100000 as score')
+            ->leftJoin('likes', 'likes.post_id', '=', 'posts.id')
+            ->groupBy('likes.id', 'posts.id', 'posts.created_at', 'posts.updated_at', 'posts.title', 'posts.id', 'posts.content', 'posts.datetime_posted', 'posts.user_id', 'posts.edited', 'posts.slug')
+            ->orderByDesc('likes_count')
+            ->orderBy('score')
+            ->paginate(12);
         foreach ($posts as $post) {
             $post->likes = $post->likes_count;
         }
@@ -47,9 +53,7 @@ class PostController extends Controller
             $post->gender = $user->gender;
             $post->age = $user->age;
         }
-        foreach ($posts as $post) {
-            $post->score = $post->likes  + (time() - strtotime($post->updated_at)) / 100000;
-        }
+
         return view('display', ['posts' => $posts]);
     }
     public function get_recent()
