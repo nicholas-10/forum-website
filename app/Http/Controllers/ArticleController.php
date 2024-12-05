@@ -21,7 +21,7 @@ class ArticleController extends Controller
     {
 
         $validated = $request->validate([
-            'title' => 'required|unique:posts|max:255',
+            'title' => 'required|unique:articles|max:255',
             'content' => 'required',
             'image' => 'required'
         ]);
@@ -35,12 +35,13 @@ class ArticleController extends Controller
         $article->user_id = Auth::user()->id;
         $article->image_path = $path;
         $article->save();
-        $article->slug = Str::of($request->title)->slug('-') . '-' . $article->id ;
+        $article->slug = Str::of($request->title)->slug('-') . '-' . $article->id;
         $article->delete();
         $article->save();
 
         return redirect()->route('article.show', $article->slug);
     }
+
     public static function show_articles()
     {
         $articles = Article::orderBy('updated_at', 'desc')->paginate(5);
@@ -49,10 +50,17 @@ class ArticleController extends Controller
         }
         return view('articles', ['articles' => $articles]);
     }
+
     public function show_article($slug)
     {
         $article = Article::where('articles.slug', '=', $slug)->firstOrFail();
         $article->name = DB::table('users')->where('id', '=', $article->user_id)->get()[0]->name;
         return view('article', ['article' => $article]);
+    }
+
+    public function delete_article(Request $request)
+    {
+        $deleted = DB::table('articles')->where('articles.id', '=', $request->article_id)->delete();
+        return redirect(route('articles'));
     }
 }

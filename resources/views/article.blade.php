@@ -3,9 +3,27 @@
 @section('title', $article->title)
 
 @section('content')
+<style>
+    .delete-btn {
+        border: none;
+        padding: 0px;
+        margin-right: 5px;
+    }
+    </style>
 <div class="card mx-auto mb-5" style="">
     <div class="card-body">
-        <h5 class="card-title">{{ $article->title }}</h5>
+        <div class="d-flex justify-content-between mb-2">
+            <h5 class="card-title">{{ $article->title }}</h5>
+            @auth
+            <form action="{{route('delete.article')}}" method="POST">
+                @csrf
+                @if ($article->user_id == Auth::user()->id || Auth::user()->is_admin)
+                    <button type="submit" value="delete" name="delete" class="btn delete-btn"><img style="width: 20px" src="{{ asset('/delete.png') }}" alt="Delete"></button>
+                @endif
+                <input type="hidden" name="article_id" value={{$article->id}}>
+            </form>
+            @endauth
+        </div>
         <div class="card mb-3">
             <img src="{{ url($article->image_path) }}" class="card-img-top mx-auto" alt="...">
         </div>

@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 
 Route::get('/articles', [ArticleController::class, 'show_articles'])->name('articles');
 Route::get('/articles/{slug}', [ArticleController::class, 'show_article'])->name('article.show');
+Route::post('/delete-article', [ArticleController::class, 'delete_article'])->name('delete.article');
+
 Route::post('/delete-post', [PostController::class, 'delete_post'])->name('delete.post');
 Route::post('/delete-comment', [CommentController::class, 'delete_comment'])->name('delete.comment');
 

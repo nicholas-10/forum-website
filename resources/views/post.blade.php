@@ -4,62 +4,30 @@
 
 @section('content')
 <style>
-.like-btn.active {
-    color: black;
-    border: none;
-    background-color: rgb(255, 164, 250);
-}
-
 .like-btn {
-    color: black;
-    border-color: rgb(255, 164, 250);
-    background-color: transparent;
-}
-
-.like-btn.active:hover {
-    background-color: rgb(255, 164, 250);
-}
-
-.like-btn:hover {
-    background-color: rgb(255, 164, 250);
-}
-
-.delete-btn.active {
-    color: white;
     border: none;
-    background-color: red;
+    padding: 0px;
 }
 
 .delete-btn {
-    color: black;
-    border-color: red;
-    background-color: transparent;
+    border: none;
+    padding: 0px;
+    margin-right: 5px;
 }
-
-.delete-btn.active:hover {
-    color: white;
-    background-color: red;
-}
-
-.delete-btn:hover {
-    color: white;
-    background-color: red;
-}
-
 </style>
 <div class="card mb-4">
     <div class="card-body">
       <h5 class="card-title">{{$post->title}}</h5>
       <h6 class="card-subtitle mb-2 text-muted">By: {{ $post->gender }} ({{ $post->age }}) | Date: {{ $post->datetime_posted }} | Likes: {{$post->likes}}</h6>
-      <p class="card-text">{{$post->content}}</p>
+      <p class="card-text mb-2">{{$post->content}}</p>
       <div class="mx-auto d-flex flex-row justify-content-between">
         @auth
         <form action="{{route('like.post')}}" method="POST">
             @csrf
             @if (!$post->is_liked_by_user)
-                <button type="submit"  id="like-button" value="like" name="likestatus" class="btn like-btn ">Like</button>
+                <button type="submit" value="like" name="likestatus" class="btn like-btn"><img style="width: 20px" src="{{ asset('/not-like.png') }}" alt="Like"></button>
             @else
-                <button type="submit"  id="like-button" value="no-like" name="likestatus" class="btn like-btn active">Unlike</button>
+                <button type="submit" value="no-like" name="likestatus" class="btn like-btn"><img style="width: 20px" src="{{ asset('/like.png') }}" alt="Unlike"></button>
             @endif
             <input type="hidden" name="post_id" value={{$post->id}}>
         </form>
@@ -68,7 +36,7 @@
         <form action="{{route('delete.post')}}" method="POST">
             @csrf
             @if ($post->user_id == Auth::user()->id || Auth::user()->is_admin)
-                <button type="submit"  id="like-button" value="like" name="likestatus" class="btn delete-btn">Delete</button>
+                <button type="submit" value="delete" name="delete" class="btn delete-btn"><img style="width: 20px" src="{{ asset('/delete.png') }}" alt="Delete"></button>
             @endif
             <input type="hidden" name="post_id" value={{$post->id}}>
         </form>
@@ -97,15 +65,15 @@
     <div class="card">
         <div class="card-body">
             <h6 class="card-subtitle mb-2 text-muted">By: {{ $comment->name }} | Date: {{ $comment->datetime_commented }} | Likes: {{$comment->comment_likes_count}}</h6>
-            <p class="card-text">{{$comment->content}}</p>
+            <p class="card-text mb-2">{{$comment->content}}</p>
             <div class="mx-auto d-flex flex-row justify-content-between">
                 @auth
                     <form action="{{route('like.comment')}}" method="POST">
                         @csrf
                         @if (!$comment->is_liked_by_user)
-                            <button type="submit"  id="like-button" value="like" name="likestatus" class="btn like-btn">Like</button>
+                            <button type="submit" value="like" name="likestatus" class="btn like-btn"><img style="width: 20px" src="{{ asset('/not-like.png') }}" alt="Like"></button>
                         @else
-                            <button type="submit"  id="like-button" value="no-like" name="likestatus" class="btn like-btn active">Unlike</button>
+                            <button type="submit" value="no-like" name="likestatus" class="btn like-btn"><img style="width: 20px" src="{{ asset('/like.png') }}" alt="Unlike"></button>
                         @endif
                         <input type="hidden" name="comment_id" value={{$comment->id}}>
                     </form>
@@ -114,7 +82,7 @@
                 <form action="{{route('delete.comment')}}" method="POST">
                     @csrf
                     @if ($comment->user_id == Auth::user()->id || Auth::user()->is_admin)
-                        <button type="submit"  id="like-button" value="like" name="likestatus" class="btn delete-btn">Delete</button>
+                        <button type="submit" value="delete" name="delete" class="btn delete-btn"><img style="width: 20px" src="{{ asset('/delete.png') }}" alt="Delete"></button>
                     @endif
                     <input type="hidden" name="comment_id" value={{$comment->id}}>
                 </form>
