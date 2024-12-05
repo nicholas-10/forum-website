@@ -78,4 +78,10 @@ class PostController extends Controller
         }
         return view('post', ['post' => $post, 'comments' => $comments]);
     }
+
+    public function delete_post(Request $request)
+    {
+        $deleted = DB::table('posts')->where('posts.id', '=', $request->post_id)->delete();
+        return redirect(route('newest'));
+    }
 }

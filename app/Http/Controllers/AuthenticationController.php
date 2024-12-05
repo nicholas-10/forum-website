@@ -68,7 +68,6 @@ class AuthenticationController extends Controller
             'name' => ['unique:users', 'required'],
             'gender' => 'required'
         ]);
-        // dd($request->all());
 
         $user = new User();
         $user->name = $request->name;
@@ -76,6 +75,7 @@ class AuthenticationController extends Controller
         $user->age = $request->age;
         $user->gender = $request->gender;
         $user->password = Hash::make($request->password);
+        $user->is_admin = false;
         $user->save();
         Auth::login($user);
         return redirect()->route('home')->withSuccess('Registered Successfully');
