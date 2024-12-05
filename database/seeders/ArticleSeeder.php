@@ -24,7 +24,8 @@ class ArticleSeeder extends Seeder
             'created_at' => $date,
             'updated_at' => $date,
             'user_id' => $userIds[array_rand($userIds)],
-            'image_path' => '/gp.jpg'
+            'image_path' => '/gp.jpg',
+            'slug' => Str::of('The Gender Pay Gap: Why It Still Exists and What Needs to Change')->slug('-') . '-1'
         ]);
         $date = date("Y-m-d", rand(strtotime("2020-1-1"), strtotime("2024-12-31")));
         DB::table('articles')->insert([
@@ -34,7 +35,8 @@ class ArticleSeeder extends Seeder
             'created_at' => $date,
             'updated_at' => $date,
             'user_id' => $userIds[array_rand($userIds)],
-            'image_path' => '/gs.jpg'
+            'image_path' => '/gs.jpg',
+            'slug' => Str::of('Breaking Free from Gender Stereotypes')->slug('-') . '-2'
         ]);
     }
 }

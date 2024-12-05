@@ -18,7 +18,7 @@
         @foreach ($posts as $post)
         <div class="col-md-4 mb-4">
             <div class="card card-hover" >
-                <a style="color: inherit; text-decoration: none;" href="{{ route('posts.show', $post->id) }}" class="">
+                <a style="color: inherit; text-decoration: none;" href="{{ route('posts.show', $post->slug) }}" class="">
                     <div class="card-body">
                         <h5 class="card-title">{{ $post->title }}</h5>
                         <h6 class="card-subtitle mb-2 text-body-secondary">
@@ -46,7 +46,7 @@
 @isset($articles)
     @foreach ($articles as $article)
     <div class="card card-hover mx-auto mb-4" style="width: 50%; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-        <a href="{{ route('article.show', $article->id) }}" style="color: inherit; text-decoration: none;">
+        <a href="{{ route('article.show', $article->slug) }}" style="color: inherit; text-decoration: none;">
             <div class="card-body">
                 <h5 class="card-title">{{$article->title}}</h5>
                     <div class="card mb-3">

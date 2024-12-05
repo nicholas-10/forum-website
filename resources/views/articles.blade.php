@@ -5,7 +5,7 @@
 @section('content')
 @foreach ($articles as $article)
     <div class="card card-hover mx-auto mb-4" style="width: 50%; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-        <a href="{{ route('article.show', $article->id) }}" style="color: inherit; text-decoration: none;">
+        <a href="{{ route('article.show', $article->slug) }}" style="color: inherit; text-decoration: none;">
             <div class="card-body">
                 <h5 class="card-title">{{$article->title}}</h5>
                     <div class="card mb-3">

@@ -68,7 +68,7 @@ Route::get('/post', function () {
 })->name('post.page');
 Route::post('post', [PostController::class, 'post'])->name('post');
 
-Route::get('/posts/{id}', [PostController::class, 'show_post'])->name('posts.show');
+Route::get('/posts/{slug}', [PostController::class, 'show_post'])->name('posts.show');
 
 Route::post('comments', [CommentController::class, 'comment'])->name('comment');
 Route::post('comments/like', [CommentLikeController::class, 'commentLike'])->name('like.comment');
