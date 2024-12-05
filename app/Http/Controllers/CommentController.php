@@ -26,16 +26,9 @@ class CommentController extends Controller
         $comment->content = $request->content;
         $comment->user_id = Auth::user()->id;
         $referer = $request->headers->get('referer');
-<<<<<<< HEAD
-        $temp = explode('-', $referer);
-        // dd($temp);
-        $id = end($temp);
-        $comment->post_id = $id;
-=======
         $temp = explode('/', $referer);
         $slug = end($temp);
         $comment->post_id = DB::table('posts')->where('posts.slug', '=', $slug)->get()[0]->id;
->>>>>>> 7b5d12c7ea24ae5b70900c8578be0b6e6d44fc28
         $comment->save();
 
         return redirect()->back()->with('success', 'Comment submitted successfully!');
