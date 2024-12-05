@@ -24,7 +24,7 @@ class ArticleSeeder extends Seeder
             'created_at' => $date,
             'updated_at' => $date,
             'user_id' => $userIds[array_rand($userIds)],
-            'image_path' => '/storage/images/Q2sRvbAYglZC9yL056QPQWXwgxU58lHJxKVQ3rav.jpg'
+            'image_path' => '/gp.jpg'
         ]);
         $date = date("Y-m-d", rand(strtotime("2020-1-1"), strtotime("2024-12-31")));
         DB::table('articles')->insert([
@@ -34,7 +34,7 @@ class ArticleSeeder extends Seeder
             'created_at' => $date,
             'updated_at' => $date,
             'user_id' => $userIds[array_rand($userIds)],
-            'image_path' => '/storage/images/LI6wuEl6zK6oMNdcy299yhiIIzMr3246ui7clV3A.jpg'
+            'image_path' => '/gs.jpg'
         ]);
     }
 }
