@@ -3,14 +3,34 @@
 @section('title', 'Search')
 
 @section('content')
-<div class="mx-auto d-flex gap-4 mb-4">
-    <form class="d-flex " action={{route('search')}} role="search">
-        <button type="submit"  class="btn btn-primary">Posts</button>
-        <input type="hidden"  name="search" aria-label="Search" value={{request('search')}}>
+<style>
+.filter-tab {
+    color: var(--brown);
+    padding: 10px 0;
+    border-bottom: 2px solid transparent;
+    font-size: 16px;
+    border: none;
+}
+
+.filter-tab:hover {
+    color: var(--dark-brown);
+    border-color: var(--dark-brown);
+}
+
+.filter-tab.active {
+    color: var(--brown);
+    border-bottom: 2px solid var(--brown);
+    font-weight: bold;
+}
+</style>
+<div class="mx-auto d-flex mb-4" style="border-bottom: 1px solid var(--brown);">
+    <form class="flex-grow-1" action="{{ route('search') }}" method="get" role="search">
+        <input type="hidden" name="search" aria-label="Search" value="{{ request('search') }}">
+        <button type="submit" class="filter-tab fs-5 bg-transparent text-center w-100 {{ request()->routeIs('search') ? 'active' : '' }}">Posts</button>
     </form>
-    <form class="d-flex" action={{route('search.article')}} role="search">
-        <button type="submit" class="btn btn-primary">Articles</button>
-        <input type="hidden"  name="search" aria-label="Search" value={{request('search')}}>
+    <form class="flex-grow-1" action="{{ route('search.article') }}" method="get" role="search">
+        <input type="hidden" name="search" aria-label="Search" value="{{ request('search') }}">
+        <button type="submit" class="filter-tab fs-5 bg-transparent text-center w-100 {{ request()->routeIs('search.article') ? 'active' : '' }}">Articles</button>
     </form>
 </div>
 @isset($posts)

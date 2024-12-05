@@ -31,11 +31,12 @@ class PostController extends Controller
         $post->user_id = Auth::user()->id;
         $post->slug = Str::of($request->title)->slug('-');
         $post->save();
-        $post->slug = Str::of($request->title)->slug('-') . '-' . $post->id ;
+        $post->slug = Str::of($request->title)->slug('-') . '-' . $post->id;
         $post->delete();
         $post->save();
         return redirect()->route('posts.show', $post->slug);
     }
+
     public function get_popular()
     {
         $posts = DB::table('posts')
@@ -53,9 +54,12 @@ class PostController extends Controller
             $post->gender = $user->gender;
             $post->age = $user->age;
         }
-
+        foreach ($posts as $post) {
+            $post->score = $post->likes + (time() - strtotime($post->updated_at)) / 100000;
+        }
         return view('display', ['posts' => $posts]);
     }
+
     public function get_recent()
     {
         $posts = Post::withCount('likes')->orderBy('updated_at', 'desc')->paginate(12);

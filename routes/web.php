@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 
 Route::get('/articles', [ArticleController::class, 'show_articles'])->name('articles');
 Route::get('/articles/{slug}', [ArticleController::class, 'show_article'])->name('article.show');
+Route::post('/delete-article', [ArticleController::class, 'delete_article'])->name('delete.article');
+
 Route::post('/delete-post', [PostController::class, 'delete_post'])->name('delete.post');
 Route::post('/delete-comment', [CommentController::class, 'delete_comment'])->name('delete.comment');
 
@@ -45,19 +47,9 @@ Route::post('logout', [AuthenticationController::class, 'logout'])->name('logout
 Route::get('/sign-up', [AuthenticationController::class, 'signupPage'])->name('signup.page');
 Route::post('sign-up', [AuthenticationController::class, 'signup'])->name('signup');
 
-Route::get('/', [PostController::class, 'get_recent'])->name('home');
-
-Route::get('/faq', function () {
-    return view('faq');
-})->name('faq');
-
-Route::get('/contact-us', function () {
-    return view('contact-us');
-})->name('contact');
-
-Route::get('/about-us', function () {
-    return view('about-us');
-})->name('about');
+Route::get('/', function () {
+    return view('home');
+})->name('home');
 
 Route::get('/post', function () {
     if (!(auth()->user())) {
