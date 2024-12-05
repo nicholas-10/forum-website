@@ -6,9 +6,11 @@
 <div class="mx-auto d-flex gap-4 mb-4">
     <form class="d-flex " action={{route('search')}} role="search">
         <button type="submit"  class="btn btn-primary">Posts</button>
+        <input type="hidden"  name="search" aria-label="Search" value={{request('search')}}>
     </form>
     <form class="d-flex" action={{route('search.article')}} role="search">
         <button type="submit" class="btn btn-primary">Articles</button>
+        <input type="hidden"  name="search" aria-label="Search" value={{request('search')}}>
     </form>
 </div>
 <div class="row justify-content-center">
