@@ -1,8 +1,11 @@
 :root {
+    --light-beige: #f6f5f0;
     --beige: #faf6e3;
     --sage: #d8dbbd;
     --brown: #b59f78;
+    --dark-brown: #a38f6c;
     --navy: #2a3663;
+    --blue: #daf0f7;
 }
 
 footer {

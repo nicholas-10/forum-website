@@ -14,6 +14,24 @@
     padding: 0px;
     margin-right: 5px;
 }
+
+.comment-btn{
+    background-color: var(--brown);
+    border: none;
+    color: white;
+}
+
+.comment-btn:hover{
+    background-color: var(--dark-brown);
+    border: none;
+    color: white;
+}
+
+.comment-btn:active{
+    background-color: var(--dark-brown) !important;
+    border: none !important;
+    color: white !important;
+}
 </style>
 <div class="card mb-4">
     <div class="card-body">
@@ -50,7 +68,7 @@
         <div class="form-floating d-flex gap-4 align-items-center">
             <textarea name="content" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
             <label for="floatingTextarea">Comment</label>
-            <button type="submit" class="btn btn-primary">Comment</button>
+            <button type="submit" class="btn comment-btn">Comment</button>
         </div>
     </form>
 @endauth

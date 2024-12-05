@@ -5,7 +5,7 @@
 @section('content')
 <style>
 .filter-tab {
-    color: #555;
+    color: var(--brown);
     padding: 10px 0;
     border-bottom: 2px solid transparent;
     font-size: 16px;
@@ -13,17 +13,17 @@
 }
 
 .filter-tab:hover {
-    color: #007bff;
-    border-color: #007bff;
+    color: var(--dark-brown);
+    border-color: var(--dark-brown);
 }
 
 .filter-tab.active {
-    color: #007bff;
-    border-bottom: 2px solid #007bff;
+    color: var(--brown);
+    border-bottom: 2px solid var(--brown);
     font-weight: bold;
 }
 </style>
-<div class="mx-auto d-flex mb-4 border-bottom">
+<div class="mx-auto d-flex mb-4" style="border-bottom: 1px solid var(--brown);">
     <form class="flex-grow-1" action="{{ route('search') }}" method="get" role="search">
         <input type="hidden" name="search" aria-label="Search" value="{{ request('search') }}">
         <button type="submit" class="filter-tab fs-5 bg-transparent text-center w-100 {{ request()->routeIs('search') ? 'active' : '' }}">Posts</button>

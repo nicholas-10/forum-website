@@ -3,6 +3,22 @@
 @section('title', 'Upload Article')
 
 @section('content')
+<style>
+.upload-btn{
+    background-color: var(--brown);
+    border: none;
+}
+
+.upload-btn:hover{
+    background-color: var(--dark-brown);
+    border: none;
+}
+
+.upload-btn:active{
+    background-color: var(--dark-brown) !important;
+    border: none !important;
+}
+</style>
 <form class="border rounded p-4 d-flex flex-column gap-3 bg-white" style="margin-top: 5vh" action="{{ route('article.upload') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <h2>Upload an Article</h2>
@@ -18,6 +34,6 @@
         <label for="image" class="form-label">Article Image</label>
         <input type="file" name="image" id="image" accept="image/*" required>
     </div>
-    <button type="submit" class="btn btn-primary">Upload</button>
+    <button type="submit" class="btn upload-btn">Upload</button>
 </form>
 @endsection
