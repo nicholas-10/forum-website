@@ -18,7 +18,7 @@
             <form action="{{route('delete.article')}}" method="POST">
                 @csrf
                 @if ($article->user_id == Auth::user()->id || Auth::user()->is_admin)
-                    <button type="submit" value="delete" name="delete" class="btn delete-btn"><img style="width: 20px" src="{{ asset('/delete.png') }}" alt="Delete"></button>
+                    <button type="submit" value="delete" name="delete" class="delete-btn"><img style="width: 20px" src="{{ asset('/delete.png') }}" alt="Delete"></button>
                 @endif
                 <input type="hidden" name="article_id" value={{$article->id}}>
             </form>

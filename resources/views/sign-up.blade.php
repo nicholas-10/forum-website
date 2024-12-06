@@ -3,6 +3,14 @@
 @section('title', 'Register')
 
 @section('content')
+<style>
+.form-check-input:checked{
+    border-color: var(--brown);
+    background-color: var(--brown);
+    box-shadow: none;
+}
+</style>
+
 <form class="border rounded p-4 d-flex flex-column gap-3 bg-white" style="margin-top: 5vh" action={{ route('signup') }} method="POST">
     @csrf
     <h2>Sign Up</h2>

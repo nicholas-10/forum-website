@@ -7,16 +7,19 @@
 .upload-btn{
     background-color: var(--brown);
     border: none;
+    color: white;
 }
 
 .upload-btn:hover{
     background-color: var(--dark-brown);
     border: none;
+    color: white;
 }
 
 .upload-btn:active{
     background-color: var(--dark-brown) !important;
     border: none !important;
+    color: white !important;
 }
 </style>
 @auth

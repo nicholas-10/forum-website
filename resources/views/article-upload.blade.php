@@ -7,16 +7,19 @@
 .upload-btn{
     background-color: var(--brown);
     border: none;
+    color: white;
 }
 
 .upload-btn:hover{
     background-color: var(--dark-brown);
     border: none;
+    color: white;
 }
 
 .upload-btn:active{
     background-color: var(--dark-brown) !important;
     border: none !important;
+    color: white !important;
 }
 </style>
 <form class="border rounded p-4 d-flex flex-column gap-3 bg-white" style="margin-top: 5vh" action="{{ route('article.upload') }}" method="POST" enctype="multipart/form-data">

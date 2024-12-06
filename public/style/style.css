@@ -5,7 +5,15 @@
     --brown: #b59f78;
     --dark-brown: #a38f6c;
     --navy: #2a3663;
-    --blue: #daf0f7;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('/poppins.ttf') format('truetype');
+}
+
+*{
+    font-family: 'Poppins';
 }
 
 footer {

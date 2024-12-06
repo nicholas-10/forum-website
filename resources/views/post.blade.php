@@ -7,30 +7,14 @@
 .like-btn {
     border: none;
     padding: 0px;
+    background-color: transparent
 }
 
 .delete-btn {
     border: none;
     padding: 0px;
     margin-right: 5px;
-}
-
-.comment-btn{
-    background-color: var(--brown);
-    border: none;
-    color: white;
-}
-
-.comment-btn:hover{
-    background-color: var(--dark-brown);
-    border: none;
-    color: white;
-}
-
-.comment-btn:active{
-    background-color: var(--dark-brown) !important;
-    border: none !important;
-    color: white !important;
+    background-color: transparent
 }
 </style>
 <div class="card mb-4">
@@ -43,9 +27,9 @@
         <form action="{{route('like.post')}}" method="POST">
             @csrf
             @if (!$post->is_liked_by_user)
-                <button type="submit" value="like" name="likestatus" class="btn like-btn"><img style="width: 20px" src="{{ asset('/not-like.png') }}" alt="Like"></button>
+                <button type="submit" value="like" name="likestatus" class="like-btn"><img style="width: 20px" src="{{ asset('/not-like.png') }}" alt="Like"></button>
             @else
-                <button type="submit" value="no-like" name="likestatus" class="btn like-btn"><img style="width: 20px" src="{{ asset('/like.png') }}" alt="Unlike"></button>
+                <button type="submit" value="no-like" name="likestatus" class="like-btn"><img style="width: 20px" src="{{ asset('/like.png') }}" alt="Unlike"></button>
             @endif
             <input type="hidden" name="post_id" value={{$post->id}}>
         </form>
@@ -54,7 +38,7 @@
         <form action="{{route('delete.post')}}" method="POST">
             @csrf
             @if ($post->user_id == Auth::user()->id || Auth::user()->is_admin)
-                <button type="submit" value="delete" name="delete" class="btn delete-btn"><img style="width: 20px" src="{{ asset('/delete.png') }}" alt="Delete"></button>
+                <button type="submit" value="delete" name="delete" class="delete-btn"><img style="width: 20px" src="{{ asset('/delete.png') }}" alt="Delete"></button>
             @endif
             <input type="hidden" name="post_id" value={{$post->id}}>
         </form>
@@ -68,7 +52,7 @@
         <div class="form-floating d-flex gap-4 align-items-center">
             <textarea name="content" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
             <label for="floatingTextarea">Comment</label>
-            <button type="submit" class="btn comment-btn">Comment</button>
+            <button type="submit" class="btn">Comment</button>
         </div>
     </form>
 @endauth
@@ -89,9 +73,9 @@
                     <form action="{{route('like.comment')}}" method="POST">
                         @csrf
                         @if (!$comment->is_liked_by_user)
-                            <button type="submit" value="like" name="likestatus" class="btn like-btn"><img style="width: 20px" src="{{ asset('/not-like.png') }}" alt="Like"></button>
+                            <button type="submit" value="like" name="likestatus" class="like-btn"><img style="width: 20px" src="{{ asset('/not-like.png') }}" alt="Like"></button>
                         @else
-                            <button type="submit" value="no-like" name="likestatus" class="btn like-btn"><img style="width: 20px" src="{{ asset('/like.png') }}" alt="Unlike"></button>
+                            <button type="submit" value="no-like" name="likestatus" class="like-btn"><img style="width: 20px" src="{{ asset('/like.png') }}" alt="Unlike"></button>
                         @endif
                         <input type="hidden" name="comment_id" value={{$comment->id}}>
                     </form>
@@ -100,7 +84,7 @@
                 <form action="{{route('delete.comment')}}" method="POST">
                     @csrf
                     @if ($comment->user_id == Auth::user()->id || Auth::user()->is_admin)
-                        <button type="submit" value="delete" name="delete" class="btn delete-btn"><img style="width: 20px" src="{{ asset('/delete.png') }}" alt="Delete"></button>
+                        <button type="submit" value="delete" name="delete" class="delete-btn"><img style="width: 20px" src="{{ asset('/delete.png') }}" alt="Delete"></button>
                     @endif
                     <input type="hidden" name="comment_id" value={{$comment->id}}>
                 </form>
