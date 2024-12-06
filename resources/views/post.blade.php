@@ -7,14 +7,14 @@
 .like-btn {
     border: none;
     padding: 0px;
-    background-color: transparent
+    background-color: transparent;
 }
 
 .delete-btn {
     border: none;
     padding: 0px;
     margin-right: 5px;
-    background-color: transparent
+    background-color: transparent;
 }
 </style>
 <div class="card mb-4">

@@ -25,7 +25,7 @@
 @auth
     <form class="border rounded p-4 d-flex flex-column gap-3 bg-white" style="margin-top: 5vh" action={{ route('post') }} method="POST">
         @csrf
-        <h2>Upload a Post</h2>
+        <h2 style="font-weight: bold;">Upload a Post</h2>
         <div class="d-flex flex-column fw-bold">
             <label for="exampleFormControlInput1" class="form-label">Post Title</label>
             <input type="text" class="form-control" id="postTitle" name="title" placeholder="e.g. What is Gender Equality?">

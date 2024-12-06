@@ -13,7 +13,7 @@
 
 <form class="border rounded p-4 d-flex flex-column gap-3 bg-white" style="margin-top: 5vh" action={{ route('signup') }} method="POST">
     @csrf
-    <h2>Sign Up</h2>
+    <h2 style="font-weight: bold;">Sign Up</h2>
     <div>
         <label for="validationDefault01" class="form-label fw-bold">Username</label>
         <input type="text" name="name" class="form-control" id="validationDefault01" value="{{ old('name') }}" required>

@@ -5,6 +5,7 @@
 @section('content')
 <style>
     .delete-btn {
+        background-color: transparent;
         border: none;
         padding: 0px;
         margin-right: 5px;
