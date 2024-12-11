@@ -41,8 +41,8 @@ class PostController extends Controller
     {
         $posts = DB::table('posts')
             ->selectRaw('posts.*, COUNT(likes.id) as likes_count, (UNIX_TIMESTAMP() - UNIX_TIMESTAMP(posts.updated_at)) / 100000 as score')
-            ->join('likes', 'likes.post_id', '=', 'posts.id')
-            ->groupBy('likes.id', 'posts.id', 'posts.created_at', 'posts.updated_at', 'posts.title', 'posts.id', 'posts.content', 'posts.datetime_posted', 'posts.user_id', 'posts.edited', 'posts.slug')
+            ->leftJoin('likes', 'likes.post_id', '=', 'posts.id')
+            ->groupBy('posts.id', 'posts.created_at', 'posts.updated_at', 'posts.title', 'posts.id', 'posts.content', 'posts.datetime_posted', 'posts.user_id', 'posts.edited', 'posts.slug')
             ->orderByDesc('likes_count')
             ->orderBy('score')
             ->paginate(12);
